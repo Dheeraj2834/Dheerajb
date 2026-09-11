@@ -7,53 +7,59 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
+
   rules:
     - http:
-        paths:
-          - path: /cart(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: cart-service
-                port:
-                  number: 80
+        # MAIN PAGE
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: main-service
+              port:
+                number: 80
 
-          - path: /checkout(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: checkout-service
-                port:
-                  number: 80
+        # HOME
+        - path: /home(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: home-service
+              port:
+                number: 80
 
-          - path: /signup(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: signup-service
-                port:
-                  number: 80
+        # CART
+        - path: /cart(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: cart-service
+              port:
+                number: 80
 
-          - path: /login(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: login-service
-                port:
-                  number: 80
+        # CHECKOUT
+        - path: /checkout(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: checkout-service
+              port:
+                number: 80
 
-          - path: /home(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: home-service
-                port:
-                  number: 80
+        # LOGIN
+        - path: /login(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: login-service
+              port:
+                number: 80
 
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: main-service
-                port:
-                  number: 80
+        # SIGNUP
+        - path: /signup(/|$)(.*)
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: signup-service
+              port:
+                number: 80

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FreshVeggies - Home</title>
+    <title>FreshVeggies - Main</title>
 
     <style>
         * {
@@ -23,13 +23,18 @@
         }
 
         .container {
-            text-align: center;
+            width: 90%;
+            max-width: 700px;
             background: white;
             padding: 50px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            width: 90%;
-            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 50px;
+            margin-bottom: 10px;
         }
 
         h1 {
@@ -38,8 +43,8 @@
             margin-bottom: 10px;
         }
 
-        p {
-            color: #555;
+        .subtitle {
+            color: #666;
             font-size: 18px;
             margin-bottom: 35px;
         }
@@ -51,43 +56,63 @@
         }
 
         .btn {
-            text-decoration: none;
-            padding: 18px 25px;
+            display: block;
+            padding: 18px 20px;
             border-radius: 12px;
+            text-decoration: none;
             color: white;
             font-size: 18px;
             font-weight: bold;
-            transition: 0.3s;
-            display: block;
+            transition: all 0.3s ease;
         }
 
         .btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
         }
 
+        /* Cart */
         .cart {
             background: #ff6b6b;
         }
 
+        /* Checkout */
         .checkout {
             background: #ff9f43;
         }
 
+        /* Signup */
         .signup {
             background: #1dd1a1;
         }
 
+        /* Login */
         .login {
             background: #54a0ff;
         }
 
+        /* Home */
         .home {
             background: #5f27cd;
             grid-column: span 2;
         }
 
+        .footer {
+            margin-top: 30px;
+            color: #777;
+            font-size: 14px;
+        }
+
         @media (max-width: 600px) {
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
             .buttons {
                 grid-template-columns: 1fr;
             }
@@ -103,32 +128,45 @@
 
     <div class="container">
 
-        <h1>🥕 FreshVeggies</h1>
+        <div class="logo">🥕</div>
 
-        <p>Fresh vegetables delivered to your doorstep</p>
+        <h1>FreshVeggies</h1>
+
+        <p class="subtitle">
+            Fresh vegetables delivered to your doorstep
+        </p>
 
         <div class="buttons">
 
+            <!-- Cart -->
             <a href="/cart" class="btn cart">
                 🛒 Cart
             </a>
 
+            <!-- Checkout -->
             <a href="/checkout" class="btn checkout">
                 💳 Checkout
             </a>
 
+            <!-- Signup -->
             <a href="/signup" class="btn signup">
                 📝 Signup
             </a>
 
+            <!-- Login -->
             <a href="/login" class="btn login">
                 🔐 Login
             </a>
 
-            <a href="/" class="btn home">
+            <!-- Home -->
+            <a href="/home" class="btn home">
                 🏠 Home
             </a>
 
+        </div>
+
+        <div class="footer">
+            Fresh • Healthy • Delivered
         </div>
 
     </div>
