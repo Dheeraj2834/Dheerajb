@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: signup
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: signup
+  template:
+    metadata:
+      labels:
+        app: signup
+    spec:
+      containers:
+        - name: signup
+          image: 827566277160.dkr.ecr.us-east-1.amazonaws.com/signup:latest
+          ports:
+            - containerPort: 80

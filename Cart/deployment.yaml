@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cart
+  template:
+    metadata:
+      labels:
+        app: cart
+    spec:
+      containers:
+        - name: cart
+          image: 827566277160.dkr.ecr.us-east-1.amazonaws.com/cart:latest
+          ports:
+            - containerPort: 80

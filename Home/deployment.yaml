@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: home
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: home
+  template:
+    metadata:
+      labels:
+        app: home
+    spec:
+      containers:
+        - name: home
+          image: 827566277160.dkr.ecr.us-east-1.amazonaws.com/home:latest
+          ports:
+            - containerPort: 80
