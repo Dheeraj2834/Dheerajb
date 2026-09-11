@@ -11,7 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
@@ -20,93 +20,91 @@
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #d4fc79, #96e6a1);
+            padding: 20px;
         }
 
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 700px;
-            background: white;
+            background: #ffffff;
             padding: 50px;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
         }
 
         .logo {
-            font-size: 50px;
+            font-size: 55px;
             margin-bottom: 10px;
         }
 
         h1 {
-            color: #228b22;
             font-size: 42px;
+            color: #228b22;
             margin-bottom: 10px;
         }
 
         .subtitle {
-            color: #666;
             font-size: 18px;
+            color: #666;
             margin-bottom: 35px;
         }
 
         .buttons {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 18px;
         }
 
         .btn {
-            display: block;
-            padding: 18px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 60px;
+            padding: 15px 20px;
             border-radius: 12px;
             text-decoration: none;
-            color: white;
+            color: #ffffff;
             font-size: 18px;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         .btn:hover {
-            transform: translateY(-5px);
+            transform: translateY(-4px);
             box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
         }
 
-        /* Cart */
         .cart {
             background: #ff6b6b;
         }
 
-        /* Checkout */
         .checkout {
             background: #ff9f43;
         }
 
-        /* Signup */
         .signup {
             background: #1dd1a1;
         }
 
-        /* Login */
         .login {
             background: #54a0ff;
         }
 
-        /* Home */
         .home {
             background: #5f27cd;
-            grid-column: span 2;
+            grid-column: 1 / -1;
         }
 
         .footer {
             margin-top: 30px;
-            color: #777;
             font-size: 14px;
+            color: #777;
         }
 
         @media (max-width: 600px) {
-
             .container {
-                padding: 30px 20px;
+                padding: 35px 20px;
             }
 
             h1 {
@@ -118,7 +116,7 @@
             }
 
             .home {
-                grid-column: span 1;
+                grid-column: auto;
             }
         }
     </style>
