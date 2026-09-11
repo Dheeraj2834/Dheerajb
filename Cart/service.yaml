@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: main-service
+  name: cart-service
 spec:
   type: ClusterIP
   selector:
-    app: main
+    app: cart
   ports:
     - port: 80
       targetPort: 80
