@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - FreshVeggies</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f8f3;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: #2e7d32;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            padding: 35px 20px 20px;
+        }
+
+        .page-title h1 {
+            color: #2e7d32;
+            font-size: 32px;
+        }
+
+        .page-title p {
+            margin-top: 8px;
+            color: #666;
+        }
+
+        /* Checkout Container */
+        .checkout-container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 20px auto 50px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        /* Form Section */
+        .checkout-form {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .checkout-form h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            margin-bottom: 15px;
+            color: #444;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 90px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        /* Payment */
+        .payment-option {
+            border: 1px solid #ddd;
+            padding: 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            border-color: #2e7d32;
+            background: #f5faf5;
+        }
+
+        .payment-option input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            height: fit-content;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .order-summary h2 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .item-name {
+            font-weight: bold;
+        }
+
+        .item-details {
+            color: #777;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+
+        .total {
+            border-top: 2px solid #eee;
+            padding-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: #2e7d32;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .place-order:hover {
+            background: #256628;
+        }
+
+        .back-cart {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #2e7d32;
+            text-decoration: none;
+        }
+
+        .back-cart:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">🥕 FreshVeggies</div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="index.html#categories">Categories</a>
+            <a href="cart.html">Cart 🛒</a>
+        </nav>
+    </header>
+
+    <!-- Page Title -->
+    <div class="page-title">
+        <h1>Checkout</h1>
+        <p>Complete your order and get fresh vegetables delivered to your doorstep.</p>
+    </div>
+
+    <!-- Checkout -->
+    <div class="checkout-container">
+
+        <!-- Customer Form -->
+        <div class="checkout-form">
+
+            <h2>Delivery Details</h2>
+
+            <form id="checkoutForm">
+
+                <!-- Customer Information -->
+                <div class="section">
+                    <h3>Customer Information</h3>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Enter your full name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter your phone number"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="section">
+
+                    <h3>Delivery Address</h3>
+
+                    <div class="form-group">
+                        <label for="address">Address</label>
+
+                        <textarea
+                            id="address"
+                            placeholder="House No, Street, Area"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="city">City</label>
+
+                            <input
+                                type="text"
+                                id="city"
+                                placeholder="City"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="state">State</label>
+
+                            <input
+                                type="text"
+                                id="state"
+                                placeholder="State"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pincode">PIN Code</label>
+
+                            <input
+                                type="text"
+                                id="pincode"
+                                placeholder="PIN Code"
+                                required
+                            >
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Payment -->
+                <div class="section">
+
+                    <h3>Payment Method</h3>
+
+                    <label class="payment-option">
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="cod"
+                            checked
+                        >
+                        💵 Cash on Delivery
+                    </label>
+
+                    <label class="payment-option">
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="upi"
+                        >
+                        📱 UPI
+                    </label>
+
+                    <label class="payment-option">
+                        <input
+                            type="radio"
+                            name="payment"
+                            value="card"
+                        >
+                        💳 Credit / Debit Card
+                    </label>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="place-order"
+                >
+                    🛒 Place Order
+                </button>
+
+            </form>
+
+            <a href="cart.html" class="back-cart">
+                ← Back to Cart
+            </a>
+
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+
+            <h2>Order Summary</h2>
+
+            <div class="order-item">
+                <div>
+                    <div class="item-name">🍅 Tomatoes</div>
+                    <div class="item-details">1 kg × ₹40</div>
+                </div>
+
+                <strong>₹40</strong>
+            </div>
+
+            <div class="order-item">
+                <div>
+                    <div class="item-name">🥔 Potatoes</div>
+                    <div class="item-details">1 kg × ₹35</div>
+                </div>
+
+                <strong>₹35</strong>
+            </div>
+
+            <div class="order-item">
+                <div>
+                    <div class="item-name">🥕 Carrots</div>
+                    <div class="item-details">1 kg × ₹60</div>
+                </div>
+
+                <strong>₹60</strong>
+            </div>
+
+            <div class="order-item">
+                <div>
+                    <div class="item-name">🥬 Spinach</div>
+                    <div class="item-details">500 g × ₹25</div>
+                </div>
+
+                <strong>₹25</strong>
+            </div>
+
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>₹160</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Delivery</span>
+                <span>FREE</span>
+            </div>
+
+            <div class="summary-row total">
+                <span>Total</span>
+                <span>₹160</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 FreshVeggies. Fresh vegetables delivered to your doorstep.</p>
+    </footer>
+
+    <script>
+
+        document
+            .getElementById("checkoutForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const name = document.getElementById("name").value;
+
+                const payment =
+                    document.querySelector(
+                        'input[name="payment"]:checked'
+                    ).value;
+
+                let paymentName = "Cash on Delivery";
+
+                if (payment === "upi") {
+                    paymentName = "UPI";
+                }
+
+                if (payment === "card") {
+                    paymentName = "Credit / Debit Card";
+                }
+
+                alert(
+                    "Order placed successfully! 🎉\n\n" +
+                    "Thank you, " + name + "!\n" +
+                    "Payment Method: " + paymentName + "\n" +
+                    "Order Total: ₹160"
+                );
+
+                window.location.href = "index.html";
+
+            });
+
+    </script>
+
+</body>
+</html>
