@@ -1,0 +1,64 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: freshveggies-ingress
+spec:
+  ingressClassName: nginx
+
+  rules:
+    - http:
+        paths:
+
+          # Main landing page
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: main-service
+                port:
+                  number: 80
+
+          # Cart
+          - path: /cart
+            pathType: Prefix
+            backend:
+              service:
+                name: cart-service
+                port:
+                  number: 80
+
+          # Checkout
+          - path: /checkout
+            pathType: Prefix
+            backend:
+              service:
+                name: checkout-service
+                port:
+                  number: 80
+
+          # Signup
+          - path: /signup
+            pathType: Prefix
+            backend:
+              service:
+                name: signup-service
+                port:
+                  number: 80
+
+          # Login
+          - path: /login
+            pathType: Prefix
+            backend:
+              service:
+                name: login-service
+                port:
+                  number: 80
+
+          # Home
+          - path: /home
+            pathType: Prefix
+            backend:
+              service:
+                name: home-service
+                port:
+                  number: 80
