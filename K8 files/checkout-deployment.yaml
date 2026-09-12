@@ -17,3 +17,15 @@ spec:
           image: 827566277160.dkr.ecr.us-east-1.amazonaws.com/checkout:latest
           ports:
             - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: checkout-service
+spec:
+  type: ClusterIP
+  selector:
+    app: checkout
+  ports:
+    - port: 80
+      targetPort: 80
