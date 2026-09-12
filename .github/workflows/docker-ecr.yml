@@ -1,0 +1,125 @@
+name: Build Docker Images and Push to ECR
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: 827566277160.dkr.ecr.us-east-1.amazonaws.com
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Checkout source code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configure AWS using GitHub OIDC
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # 3. Create ECR repositories if they don't exist
+      - name: Create ECR repositories
+        run: |
+          repositories=(
+            main
+            cart
+            checkout
+            home
+            login
+            signup
+          )
+
+          for repo in "${repositories[@]}"
+          do
+            echo "Checking ECR repository: $repo"
+
+            if aws ecr describe-repositories \
+              --repository-names "$repo" \
+              --region "$AWS_REGION" > /dev/null 2>&1
+            then
+              echo "Repository $repo already exists"
+            else
+              echo "Creating repository $repo"
+
+              aws ecr create-repository \
+                --repository-name "$repo" \
+                --region "$AWS_REGION"
+            fi
+          done
+
+      # 4. Login to ECR
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # 5. Build and push Main
+      - name: Build and Push Main
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/main:latest \
+            ./main
+
+          docker push \
+            $ECR_REGISTRY/main:latest
+
+      # 6. Build and push Cart
+      - name: Build and Push Cart
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/cart:latest \
+            ./Cart
+
+          docker push \
+            $ECR_REGISTRY/cart:latest
+
+      # 7. Build and push Checkout
+      - name: Build and Push Checkout
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/checkout:latest \
+            ./Checkout
+
+          docker push \
+            $ECR_REGISTRY/checkout:latest
+
+      # 8. Build and push Home
+      - name: Build and Push Home
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/home:latest \
+            ./Home
+
+          docker push \
+            $ECR_REGISTRY/home:latest
+
+      # 9. Build and push Login
+      - name: Build and Push Login
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/login:latest \
+            ./Login
+
+          docker push \
+            $ECR_REGISTRY/login:latest
+
+      # 10. Build and push Signup
+      - name: Build and Push Signup
+        run: |
+          docker build \
+            -t $ECR_REGISTRY/signup:latest \
+            ./Signup
+
+          docker push \
+            $ECR_REGISTRY/signup:latest
