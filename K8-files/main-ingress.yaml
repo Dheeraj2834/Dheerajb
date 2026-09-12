@@ -1,16 +1,27 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: freshveggies-path-ingress
+  name: freshveggies-ingress
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
+
   rules:
     - http:
         paths:
 
+          # Main page
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: main-service
+                port:
+                  number: 80
+
+          # Home
           - path: /home(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
@@ -19,6 +30,7 @@ spec:
                 port:
                   number: 80
 
+          # Cart
           - path: /cart(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
@@ -27,6 +39,7 @@ spec:
                 port:
                   number: 80
 
+          # Checkout
           - path: /checkout(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
@@ -35,6 +48,7 @@ spec:
                 port:
                   number: 80
 
+          # Login
           - path: /login(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
@@ -43,6 +57,7 @@ spec:
                 port:
                   number: 80
 
+          # Signup
           - path: /signup(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
