@@ -1,9 +1,6 @@
 name: Build Docker Images and Push to ECR
 
 on:
-#   push:
-#     branches:
-#       - main
   workflow_dispatch:
 
 permissions:
@@ -35,7 +32,6 @@ jobs:
       - name: Create ECR repositories
         run: |
           repositories=(
-            main
             cart
             checkout
             home
@@ -65,17 +61,7 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
-      # 5. Build and push Main
-      - name: Build and Push Main
-        run: |
-          docker build \
-            -t $ECR_REGISTRY/main:latest \
-            ./main
-
-          docker push \
-            $ECR_REGISTRY/main:latest
-
-      # 6. Build and push Cart
+      # 5. Build and push Cart
       - name: Build and Push Cart
         run: |
           docker build \
@@ -85,7 +71,7 @@ jobs:
           docker push \
             $ECR_REGISTRY/cart:latest
 
-      # 7. Build and push Checkout
+      # 6. Build and push Checkout
       - name: Build and Push Checkout
         run: |
           docker build \
@@ -95,7 +81,7 @@ jobs:
           docker push \
             $ECR_REGISTRY/checkout:latest
 
-      # 8. Build and push Home
+      # 7. Build and push Home
       - name: Build and Push Home
         run: |
           docker build \
@@ -105,7 +91,7 @@ jobs:
           docker push \
             $ECR_REGISTRY/home:latest
 
-      # 9. Build and push Login
+      # 8. Build and push Login
       - name: Build and Push Login
         run: |
           docker build \
@@ -115,7 +101,7 @@ jobs:
           docker push \
             $ECR_REGISTRY/login:latest
 
-      # 10. Build and push Signup
+      # 9. Build and push Signup
       - name: Build and Push Signup
         run: |
           docker build \
