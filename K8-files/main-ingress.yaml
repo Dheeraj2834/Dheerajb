@@ -5,6 +5,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
+
 spec:
   ingressClassName: nginx
 
@@ -12,12 +13,21 @@ spec:
     - http:
         paths:
 
-          # Main page
+          # Root → Login
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: main-service
+                name: login-service
+                port:
+                  number: 80
+
+          # Login
+          - path: /login(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: login-service
                 port:
                   number: 80
 
@@ -45,15 +55,6 @@ spec:
             backend:
               service:
                 name: checkout-service
-                port:
-                  number: 80
-
-          # Login
-          - path: /login(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: login-service
                 port:
                   number: 80
 
