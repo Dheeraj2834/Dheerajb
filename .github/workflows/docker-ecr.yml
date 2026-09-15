@@ -1,9 +1,10 @@
 name: Build Docker Images and Push to ECR
 
-# on:
+on:
 #   push:
 #     branches:
 #       - main
+  workflow_dispatch:
 
 permissions:
   id-token: write
